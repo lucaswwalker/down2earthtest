@@ -1,8 +1,9 @@
 kind: pipeline
+type: docker
 name: default
 
 steps:
-  - name: build
+  - name: build-jekyll-site
     image: jekyll/jekyll:latest
     commands:
       - chmod -R 777 /drone/src
@@ -10,15 +11,26 @@ steps:
       - bundle install
       - bundle exec jekyll build
 
-  - name: deploy-to-dokku
-    image: appleboy/drone-ssh
-    settings:
-      host: [127.0.0.1] # replace with your Dokku host
-      username: dokku
-      port: 22
-      key:
-        from_secret: dokku_ssh_key # Drone secret containing the SSH private key
-      script:
-        - git remote add dokku dokku@dokku.me:down2earthtest  # replace 'your_app_name' with the name of your Dokku app
-        - git push dokku master  # Push to Dokku remote to deploy the app
+  - name: build-docker-image
+    image: docker:dind
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    commands:
+      - docker build -t down2earthtest .
+      - docker save -o /tmp/down2earthtest.tar down2earthtest
+
+  - name: deploy
+    image: docker:dind
+    volumes:
+      - name: dockersock
+        path: /var/run/docker.sock
+    commands:
+      - docker load -i /tmp/down2earthtest.tar
+      - dokku tags:deploy down2earthtest latest
+
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
 
