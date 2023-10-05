@@ -1,0 +1,21 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: build
+    image: jekyll/jekyll:latest
+    commands:
+      - jekyll build
+
+  - name: deploy
+    image: appleboy/drone-ssh
+    settings:
+      host: localhost
+      username: dokku
+      key:
+        from_secret: dokku_ssh_key
+      script:
+        - cd /home/dokku/down2earthtest
+        - git pull git@github.com:lucaswwalker/down2earthtest.git master
+        - dokku ps:rebuild down2earthtest
+
