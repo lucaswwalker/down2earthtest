@@ -5,7 +5,7 @@ steps:
   - name: build
     image: jekyll/jekyll:latest
     commands:
-      - chmod -R 775 /drone/src
+      - chmod -R 777 /drone/src/Gemfile.lock
       - bundle update --bundler
       - bundle install
       - bundle exec jekyll build
