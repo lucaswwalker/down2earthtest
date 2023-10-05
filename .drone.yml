@@ -10,6 +10,17 @@ steps:
       - bundle install
       - bundle exec jekyll build
 
+  - name: test-ssh
+    image: appleboy/drone-ssh
+    settings:
+      host: [10.0.0.2] 
+      username: dokku
+      port: 22
+      key:
+        from_secret: dokku_ssh_key
+      script:
+        - echo "If you see this, SSH works."
+
   - name: deploy-to-dokku
     image: appleboy/drone-ssh
     settings:
