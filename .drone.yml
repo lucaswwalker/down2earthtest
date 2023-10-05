@@ -5,8 +5,10 @@ steps:
   - name: build
     image: jekyll/jekyll:latest
     commands:
-      - jekyll build
-
+      - bundle config set --local path vendor/bundle
+      - bundle update --bundler
+      - bundle install
+      - bundle exec jekyll build
   - name: deploy
     image: appleboy/drone-ssh
     settings:
