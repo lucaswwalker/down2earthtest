@@ -9,3 +9,16 @@ steps:
       - bundle update --bundler
       - bundle install
       - bundle exec jekyll build
+
+  - name: deploy-to-dokku
+    image: appleboy/drone-ssh
+    settings:
+      host: [dokku.me] # replace with your Dokku host
+      username: dokku
+      port: 22
+      key:
+        from_secret: dokku_ssh_key # Drone secret containing the SSH private key
+      script:
+        - git remote add dokku dokku@dokku.me:down2earthtest  # replace 'your_app_name' with the name of your Dokku app
+        - git push dokku master  # Push to Dokku remote to deploy the app
+
