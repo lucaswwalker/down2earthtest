@@ -5,7 +5,6 @@ steps:
   - name: build
     image: jekyll/jekyll:latest
     commands:
-      - bundle config set --local path vendor/bundle
       - bundle update --bundler
       - bundle install
       - bundle exec jekyll build
