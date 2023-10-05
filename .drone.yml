@@ -4,9 +4,8 @@ name: default
 steps:
   - name: build
     image: jekyll/jekyll:latest
-    user: root
     commands:
-      - chmod -R 777 /drone/src
+      - chmod -R 755 /drone/src
       - bundle update --bundler
       - bundle install
       - bundle exec jekyll build
