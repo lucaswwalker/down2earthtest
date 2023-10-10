@@ -22,15 +22,23 @@ steps:
 
   - name: deploy
     image: docker:dind
+    environment:
+      SSH_PRIVATE_KEY:
+        from_secret: dokku
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
     commands:
+      - echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa
+      - chmod 600 /root/.ssh/id_rsa
+      - ssh-keyscan -H 128.111.100.48 >> /root/.ssh/known_hosts
       - docker load -i /tmp/down2earthtest.tar
-      - dokku tags:deploy down2earthtest latest
+      - scp /tmp/down2earthtest.tar dokku@128.111.100.48:/tmp/
+      - ssh -o StrictHostKeyChecking=no dokku@128.111.100.48 "docker load -i /tmp/down2earthtest.tar"
+      - ssh -o StrictHostKeyChecking=no dokku@128.111.100.48 "dokku tags:deploy down2earthtest latest"
 
 volumes:
-- name: dockersock
-  host:
-    path: /var/run/docker.sock
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
 
