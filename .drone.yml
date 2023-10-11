@@ -37,8 +37,8 @@ steps:
         #      - ssh -o StrictHostKeyChecking=no dokku@128.111.100.48 "docker load -i /tmp/down2earthtest.tar"
         #      - ssh -o StrictHostKeyChecking=no dokku@128.111.100.48 "dokku tags:deploy down2earthtest latest"
 
-volumes:
-  - name: dockersock
-    host:
-      path: /var/run/docker.sock
+        #volumes:
+        #  - name: dockersock
+        #    host:
+        #      path: /var/run/docker.sock
 
