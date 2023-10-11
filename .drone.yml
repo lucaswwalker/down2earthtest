@@ -12,11 +12,8 @@ steps:
       - bundle exec jekyll build
 
   - name: build-and-push-docker-image
-    image: docker
-    volumes:
-      - name: dockersock
-        path: /var/run/docker.sock
-    commands:
-      - docker build -t localhost:5000/down2earthtest:latest .
-      - docker push localhost:5000/down2earthtest:latest
-
+    image: plugins/docker
+    settings:
+      repo: localhost:5000/down2earthtest
+      tags: latest
+      insecure: true
