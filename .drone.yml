@@ -11,9 +11,9 @@ steps:
       - bundle install
       - bundle exec jekyll build
 
-  - name: build-and-push-docker-image
+  - name: package
     image: plugins/docker
     settings:
       repo: localhost:5000/down2earthtest
       tags: latest
-      insecure: true
+      dockerfile: Dockerfile
