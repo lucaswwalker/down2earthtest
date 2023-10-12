@@ -11,9 +11,13 @@ steps:
       - bundle install
       - bundle exec jekyll build
 
-  - name: package
-    image: plugins/docker
+  - name: deploy
+    image: appleboy/drone-ssh
     settings:
-      repo: drone_registry:5000/down2earthtest
-      tags: latest
-      dockerfile: Dockerfile
+      host: grit-web02.grit.ucsb.edu
+      username: dokku
+      key:
+        from_secret: dokku_ssh_key
+      script:
+        - git remote add dokku dokku@grit-web02.grit.ucsb.edu:down2earthtest
+        - git push dokku master
