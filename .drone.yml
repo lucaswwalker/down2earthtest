@@ -14,6 +14,6 @@ steps:
   - name: package
     image: plugins/docker
     settings:
-      repo: 128.111.100.46:5000/down2earthtest
+      repo: localhost:5000/down2earthtest
       tags: latest
       dockerfile: Dockerfile
