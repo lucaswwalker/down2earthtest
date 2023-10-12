@@ -16,7 +16,7 @@ steps:
       host: grit-web02.grit.ucsb.edu
       username: dokku
       key:
-        from_secret: dokku_ssh_key
+        from_secret: dokku
       script:
         - ssh-keyscan -H grit-web02.grit.ucsb.edu >> ~/.ssh/known_hosts
         - git config --global user.email "lwwalker@ucsb.edu"
