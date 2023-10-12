@@ -18,6 +18,8 @@ steps:
       key:
         from_secret: dokku_ssh_key
       script:
+        - git config --global user.email "lwwalker@ucsb.edu"
+        - git config --global user.name "Lucas"
         - git init
         - git remote add dokku dokku@grit-web02.grit.ucsb.edu:down2earthtest
         - git add .
