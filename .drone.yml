@@ -10,7 +10,6 @@ steps:
       - bundle update --bundler
       - bundle install
       - bundle exec jekyll build
-
   - name: deploy
     image: appleboy/drone-ssh
     settings:
@@ -19,5 +18,8 @@ steps:
       key:
         from_secret: dokku_ssh_key
       script:
+        - git init
         - git remote add dokku dokku@grit-web02.grit.ucsb.edu:down2earthtest
+        - git add .
+        - git commit -m "Deploy"
         - git push dokku master
