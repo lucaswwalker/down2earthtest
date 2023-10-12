@@ -1,5 +1,5 @@
 # Use Jekyll image to build the website
-FROM jekyll/jekyll:4.2 as builder
+FROM jekyll/jekyll:latest as builder
 
 # Set working directory
 WORKDIR /app
