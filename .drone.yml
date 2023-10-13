@@ -1,29 +1,16 @@
 kind: pipeline
-type: docker
 name: default
 
 steps:
-  - name: build-jekyll-site
-    image: jekyll/jekyll:latest
-    commands:
-      - chmod -R 777 /drone/src
-      - bundle update --bundler
-      - bundle install
-      - bundle exec jekyll build
-  - name: deploy
-    image: appleboy/drone-ssh
-    settings:
-      host: grit-web02.grit.ucsb.edu
-      username: dokku
-      key:
+  - name: test-ssh
+    image: alpine:latest
+    environment:
+      SSH_KEY:
         from_secret: dokku
-      script:
-        - ssh-keyscan -H grit-web02.grit.ucsb.edu >> ~/.ssh/known_hosts
-          #        - git config --global user.email "lwwalker@ucsb.edu"
-          #        - git config --global user.name "Lucas"
-          #        - git init
-        - git remote remove dokku || true
-        - git remote add dokku dokku@grit-web02.grit.ucsb.edu:down2earthtest
-        - git add .
-        - git commit -m "Deploy"
-        - git push dokku
+    commands:
+      - apk add --no-cache openssh-client
+      - echo "$SSH_KEY" > /root/.ssh/id_rsa
+      - chmod 600 /root/.ssh/id_rsa
+      - ssh-keyscan -H grit-web02.grit.ucsb.edu >> /root/.ssh/known_hosts
+      - ssh -o StrictHostKeyChecking=no dokku@grit-web02.grit.ucsb.edu "echo 'SSH connection successful!'"
+
