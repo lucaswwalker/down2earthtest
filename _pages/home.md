@@ -1,6 +1,6 @@
 ---
 layout: splash
-title: "_DOWN2EARTHi_"
+title: "_LUCAWASHERE_"
 permalink: /
 author_profile: false
 header:
