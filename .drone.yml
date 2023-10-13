@@ -35,6 +35,8 @@ steps:
       - echo "$SSH_KEY" > /root/.ssh/id_rsa
       - chmod 600 /root/.ssh/id_rsa
       - ssh-keyscan -H grit-web02.grit.ucsb.edu >> /root/.ssh/known_hosts
+      - git branch
+      - git status
       - git remote add dokku dokku@grit-web02.grit.ucsb.edu:down2earthtest
       - git push dokku master
 
