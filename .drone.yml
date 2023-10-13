@@ -38,5 +38,5 @@ steps:
       - git branch
       - git status
       - git remote add dokku dokku@grit-web02.grit.ucsb.edu:down2earthtest
-      - git push dokku master
+      - git push dokku main
 
