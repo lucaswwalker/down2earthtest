@@ -2,6 +2,10 @@ kind: pipeline
 type: docker
 name: default
 
+workspace:
+  base: /workspace
+  path: project
+
 steps:
   - name: build-jekyll-site
     image: jekyll/jekyll:latest
