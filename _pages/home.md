@@ -1,6 +1,6 @@
 ---
 layout: splash
-title: "_LUCAWASHERE_"
+title: "_LUCAS WAS HERE_"
 permalink: /
 author_profile: false
 header:
@@ -12,7 +12,7 @@ header:
       url: "mailto:down2earth@cardiff.ac.uk?subject=DOWN2EARTH query"
     - label: "Latest news/blogs from DOWN2EARTH"
       url: "/recent/"
-excerpt: 'LUCAS WAS HERETranslation of climate information into multilevel decision support for social adaptation, policy development, and resilience to water scarcity in the Horn of Africa Drylands<br /> <small><br /><br /><br /><br /><a href="https://ec.europa.eu/programmes/horizon2020/en">
+excerpt: 'Translation of climate information into multilevel decision support for social adaptation, policy development, and resilience to water scarcity in the Horn of Africa Drylands<br /> <small><br /><br /><br /><br /><a href="https://ec.europa.eu/programmes/horizon2020/en">
         <img src="/assets/images/H2020-EU-KOM.png" width="180" height="120">
     </a><br /><a href="https://cordis.europa.eu/project/id/869550">**An EU Horizon 2020 Project funded under grant agreement No 869550**</a><br /><br />A [consortium of 14 institutional partners](/about_us/) from 8 countries <br /> Coordinated by <a href="https://www.cardiff.ac.uk">**Cardiff University**</a><br /><br />'
 
