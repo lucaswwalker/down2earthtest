@@ -1,6 +1,6 @@
 ---
 layout: splash
-title: "_LUCAS WAS HERE_"
+title: "_Hello Aaron_"
 permalink: /
 author_profile: false
 header:
